@@ -1,0 +1,7 @@
+- content_for :page_title do
+  = page_header_back_button admin_labels_path
+- content_for :page_title, t('spree.admin.label.edit_label')
+- content_for :page_actions do
+  = link_to Spree.t('spree.admin.import_csv'), new_import_admin_label_path(@label), class: 'btn btn-primary'
+
+= render 'form', label: @label

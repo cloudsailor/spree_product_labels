@@ -1,0 +1,22 @@
+# frozen_string_literal: true
+
+class CreateSpreeLabels < ActiveRecord::Migration<%= migration_version %>
+  def up
+    create_table :spree_labels do |t|
+      t.string :name
+      t.string :label_type
+      t.string :lang_code
+      t.integer :position
+      t.boolean :active, default: false, null: false
+      t.date :start_date
+      t.date :end_date
+      t.boolean :always_active, default: false, null: false
+
+      t.timestamps
+    end
+  end
+
+  def down
+    drop_table :spree_labels
+  end
+end

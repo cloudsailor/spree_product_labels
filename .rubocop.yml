@@ -1,7 +1,32 @@
+plugins:
+  - rubocop-rails
+
 AllCops:
   TargetRubyVersion: 3.3
   NewCops: disable
   SuggestExtensions: false
 
+Rails/HasAndBelongsToMany:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 130
+
+Lint/AmbiguousOperator:
+  Exclude:
+    - lib/spree_product_labels/engine.rb
+
+Metrics/AbcSize:
+  Max: 30
+
+Metrics/MethodLength:
+  Max: 15
+
+Style/ClassVars:
+  Exclude:
+    - lib/spree_product_labels/engine.rb
+
 Style/Documentation:
   Enabled: false
+
+

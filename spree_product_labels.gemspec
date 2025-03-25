@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative 'lib/spree/product_labels/version'
+require_relative 'lib/spree_product_labels/version'
 
 Gem::Specification.new do |spec|
   spec.name = 'spree_product_labels'
-  spec.version = Spree::ProductLabels::VERSION
+  spec.version = SpreeProductLabels::VERSION
   spec.authors = ['Vitalii Cherednichenko']
   spec.email = ['vitalii.cherednichenko@yes.pl']
 
@@ -29,6 +29,9 @@ Gem::Specification.new do |spec|
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
+  spec.add_dependency('deface')
+  spec.add_dependency('faraday')
+  spec.add_dependency('openssl')
   spec.add_dependency 'pg'
   spec.add_dependency 'rails'
   spec.add_dependency 'spree'

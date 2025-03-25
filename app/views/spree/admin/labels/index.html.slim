@@ -1,0 +1,48 @@
+- content_for :page_title, t('spree.admin.labels')
+- content_for :page_actions do
+  = link_to t('spree.admin.label.new_label'), new_admin_label_path, class: 'btn btn-primary mb-3'
+
+- if @labels.any?
+  table.table.text-center
+    thead
+      tr
+        th = t('spree.admin.label.name')
+        th = t('spree.admin.label.label_type')
+        th = t('spree.admin.label.position')
+        th = t('spree.admin.label.start_date')
+        th = t('spree.admin.label.end_date')
+        th = t('spree.admin.label.status')
+        th = t('spree.admin.label.products_count')
+        th = t('spree.admin.actions')
+    tbody
+      - @labels.each do |label|
+        tr
+          td = label.name
+          td = label.label_type
+          td = label.position
+          td
+            - if label.start_date.nil?
+              span.badge.bg-success.text-white.px-3.py-1.rounded-pill ∞
+            - else
+              = label.start_date
+          td
+            - if label.end_date.nil?
+              span.badge.bg-success.text-white.px-3.py-1.rounded-pill ∞
+            - else
+              = label.end_date
+          td
+            - if label.active
+              span.badge.bg-success.text-white = t('spree.admin.active')
+            - else
+              span.badge.bg-danger.text-white = t('spree.admin.inactive')
+          td = label.products.count
+          td
+            = link_to_with_icon('edit.svg', Spree.t(:edit), edit_admin_label_path(label),class: 'btn btn-light btn-sm', no_text: true)
+            = link_to_with_icon('delete.svg', Spree.t(:destroy), admin_label_path(label), method: :delete,
+                    class: 'btn btn-danger btn-sm delete-resource', no_text: true, data: { confirm: Spree.t(:are_you_sure) })
+- else
+  .text-center.no-objects-found.m-5
+    = Spree.t(:no_resource_found, resource: plural_resource_name(Spree::Label))
+    = " - "
+    = link_to Spree.t(:add_one), new_admin_label_path
+    = " !"

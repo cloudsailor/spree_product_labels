@@ -1,0 +1,5 @@
+- content_for :page_title do
+  = page_header_back_button admin_labels_path
+- content_for :page_title, t('spree.admin.label.new_label')
+
+= render 'form', label: @label
