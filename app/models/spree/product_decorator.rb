@@ -29,13 +29,13 @@ module Spree
     private
 
     def assign_promotion_labels
+      label_store = Spree::Store.current || Spree::Store.find_by(default_locale: I18n.locale.to_s)
       return unless prices_promotion? || default_price_promotion?
 
-      promotion_label = ::Spree::Label
-                        .where(name: 'Promotions', lang_code: I18n.locale.to_s).first_or_initialize do |label|
+      promotion_label = ::Spree::Label.where(name: 'Promotions', store: label_store).first_or_initialize do |label|
         label.attributes = {
           name: 'Promotions', label_type: 'Promotion', position: 1,
-          active: true, always_active: true, lang_code: I18n.locale.to_s
+          active: true, end_date: nil, store: label_store
         }
       end
       promotion_label.save! unless promotion_label.persisted?

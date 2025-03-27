@@ -6,7 +6,7 @@ module Spree
       before_action :set_label, only: %i[edit update destroy new_import import_products]
 
       def index
-        @labels = Spree::Label.where(lang_code: current_store.default_locale).order(:position)
+        @labels = Spree::Label.where(store_id: current_store.id).order(:position)
       end
 
       def new
@@ -14,7 +14,6 @@ module Spree
       end
 
       def create
-        params[:label][:lang_code] = current_store.default_locale
         @label = Spree::Label.new(label_params)
         if @label.save
           flash[:success] = t('spree.admin.label.created')
@@ -69,9 +68,7 @@ module Spree
       end
 
       def label_params
-        params.require(:label).permit(
-          :name, :label_type, :position, :active, :start_date, :end_date, :always_active, :lang_code
-        )
+        params.require(:label).permit(:name, :label_type, :position, :active, :start_date, :end_date, :store_id)
       end
     end
   end

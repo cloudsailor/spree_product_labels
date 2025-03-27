@@ -16,7 +16,6 @@ pl:
         new_label: New Label
         edit_label: Edit Label
         validates:
-          date: must be provided if the label is not always active
           date_blank: Start date and end date must be present unless the label is always active
           end_date_after_start_date: must be after start date
           only_one_active_label_per_priority: "Only one active label with position %{position} can exist at a time"

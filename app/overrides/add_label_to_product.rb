@@ -31,7 +31,7 @@ class AddLabelToProduct
                   <% end %>
                 </td>
                 <td>
-                  <%- if label.start_date.nil? %>
+                  <%- if label.end_date.nil? %>
                     <span class="badge bg-success text-white px-3 py-1 rounded-pill">∞</span>
                   <%- else %>
                     <%= label.start_date.strftime('%Y-%m-%d') %>

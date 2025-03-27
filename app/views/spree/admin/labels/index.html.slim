@@ -21,7 +21,7 @@
           td = label.label_type
           td = label.position
           td
-            - if label.start_date.nil?
+            - if label.end_date.nil?
               span.badge.bg-success.text-white.px-3.py-1.rounded-pill ∞
             - else
               = label.start_date
