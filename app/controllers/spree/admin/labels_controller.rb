@@ -47,24 +47,37 @@ module Spree
 
       def import_products
         uploaded_file = params[:import_file]
-        @label.products.clear if params[:overwrite] == 'true'
-        if uploaded_file.present?
-          CSV.foreach(uploaded_file.path, headers: true) do |row|
-            sku = row['sku']&.strip
-            next unless sku
-
-            variant = ::Spree::Variant.find_by(sku: sku)
-            @label.products << variant.product if variant&.product
-          end
+        if uploaded_file.blank?
+          flash[:error] = t('flash.actions.import.file_not_found')
+          return redirect_to edit_admin_label_path(@label)
         end
 
+        temp_file_path = save_to_tmp_folder(uploaded_file)
+        ImportProductsJob.perform_async(@label.id, temp_file_path, params[:overwrite])
+        flash[:notice] = t('flash.actions.import.success')
         redirect_to edit_admin_label_path(@label)
       end
 
       private
 
+      def save_to_tmp_folder(file)
+        file_name = "import_#{SecureRandom.uuid}_#{file.original_filename}"
+        file_path = Rails.root.join('tmp', 'uploads', file_name)
+        FileUtils.mkdir_p(file_path.dirname) unless Dir.exist?(file_path.dirname)
+        File.open(file_path, 'wb') { |f| f.write(file.read) }
+        file_path.to_s
+      end
+
       def set_label
-        @label = Spree::Label.find(params[:id])
+        return if params[:id].blank?
+
+        @label = Spree::Label.find_by(id: params[:id])
+        redirect_to(admin_labels_path, alert: t('spree.admin.label.not_found')) and return if @label.nil?
+
+        return unless @label.store_id != current_store.id
+
+        flash[:error] = t('spree.admin.label.not_found_in_current_store')
+        redirect_to admin_labels_path and return
       end
 
       def label_params

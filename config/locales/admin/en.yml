@@ -24,10 +24,16 @@ en:
         created: Label Created
         updated: Label Updated
         deleted: Label Deleted
+        not_found: Label not found
+        not_found_in_current_store: Label not found in current store
   flash:
     actions:
       create:
         alert: Label could not be created
       update:
         alert: Label could not be updated
+      import:
+        file_not_found: No file was uploaded
+        success: Product import has been started in the background
+
 

@@ -34,6 +34,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('openssl')
   spec.add_dependency 'pg'
   spec.add_dependency 'rails'
+  spec.add_dependency 'sidekiq'
   spec.add_dependency 'spree'
   spec.add_dependency 'spree_backend'
   spec.add_dependency 'spree_i18n'

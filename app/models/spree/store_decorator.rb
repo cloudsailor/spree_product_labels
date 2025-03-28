@@ -7,4 +7,3 @@ module Spree
     end
   end
 end
-Spree::Store.prepend Spree::StoreDecorator if Spree::Store.included_modules.exclude?(Spree::StoreDecorator)

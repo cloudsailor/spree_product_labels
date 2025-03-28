@@ -19,8 +19,16 @@ Lint/AmbiguousOperator:
 Metrics/AbcSize:
   Max: 30
 
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - app/sidekiq/import_products_job.rb
+
 Metrics/MethodLength:
   Max: 15
+
+Metrics/PerceivedComplexity:
+  Exclude:
+    - app/sidekiq/import_products_job.rb
 
 Style/ClassVars:
   Exclude:

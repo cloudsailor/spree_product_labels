@@ -22,4 +22,14 @@ Then run `rails db:migrate` so the migrations can take effect
 rails db:migrate
 ```
 
+Finally, you need to add a link to the menu in the `config/initializers/spree_admin_menu.rb` file from your application:
+
+```code
+if ActiveRecord::Base.connection.data_source_exists?('spree_labels')
+   builder_labels = ::Spree::Admin::MainMenu::ItemBuilder.new('admin.tab.labels', '/admin/labels')
+   menu_labels = builder_labels.with_match_path('/labels').build
+   Rails.application.config.spree_backend.main_menu.add_to_section 'products', menu_labels
+end
+```
+
 You should restart your application after these updates. Otherwise, you will run into strange errors, for example, route helpers being undefined.
