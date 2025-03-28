@@ -1,0 +1,14 @@
+# frozen_string_literal: true
+
+class CreateLabelsProducts < ActiveRecord::Migration<%= migration_version %>
+  def up
+    create_table :labels_products, id: false do |t|
+      t.references :label, null: false, foreign_key: { to_table: :spree_labels }
+      t.references :product, null: false, foreign_key: { to_table: :spree_products }
+    end
+  end
+
+  def down
+    drop_table :labels_products
+  end
+end

@@ -1,0 +1,37 @@
+= form_with model: [:admin, label], local: true do |f|
+  - if label.errors.any?
+    div.alert.alert-danger
+      ul
+        - label.errors.full_messages.each do |msg|
+          li= msg
+  .form-group
+    = f.label :name, t('spree.admin.label.name')
+    = f.text_field :name, class: 'form-control'
+
+  .form-group
+    = f.label :label_type, t('spree.admin.label.label_type')
+    = f.text_field :label_type, class: 'form-control'
+
+  .form-group
+    = f.label :position, t('spree.admin.label.position')
+    = f.number_field :position, class: 'form-control'
+
+  .form-group
+    = f.label :active, t('spree.admin.label.status'), class: 'mr-2'
+    = f.check_box :active
+
+  .form-group
+    = f.label :start_date, t('spree.admin.label.start_date')
+    = f.date_field :start_date, class: 'form-control'
+
+  .form-group
+    = f.label :end_date, t('spree.admin.label.end_date')
+    = f.date_field :end_date, class: 'form-control'
+
+  = f.hidden_field :store_id, value: current_store.id
+
+  .form-actions[data-hook="buttons"]
+    = button Spree.t('actions.update'), 'save.svg', 'submit', { class: 'btn-primary', data: { disable_with: "#{ Spree.t(:saving) }..." } }
+    span.or
+      = Spree.t(:or)
+    = button_link_to Spree.t('actions.cancel'), admin_labels_path, icon: 'cancel.svg', data: { turbo: false }
