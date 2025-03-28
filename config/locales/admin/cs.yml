@@ -30,4 +30,8 @@ cs:
         alert: Label could not be created
       update:
         alert: Label could not be updated
+      import:
+        file_not_found: No file was uploaded
+        success: Product import has been started in the background
+
 

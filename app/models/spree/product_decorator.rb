@@ -10,8 +10,8 @@ module Spree
     end
 
     def first_active_label
-      date_range = labels.where('start_date <= ? AND end_date >= ?', Time.zone.today, Time.zone.today)
-                         .or(labels.where(always_active: true))
+      all_active_labels = labels.where('start_date <= ? AND end_date >= ?', Time.zone.today, Time.zone.today)
+                                .or(labels.where(always_active: true))
 
       priority_positions = labels.where(active: true).pluck(:position).uniq.sort
 
@@ -20,7 +20,7 @@ module Spree
           lang_code: I18n.locale.to_s,
           active: true,
           position: pos,
-          id: date_range.select(:id)
+          id: all_active_labels.select(:id)
         )
         return label&.name if label.present?
       end
