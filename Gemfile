@@ -3,11 +3,11 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-# Specify your gem's dependencies in spree-seo.gemspec.
+# Specify your gem's dependencies in spree-spree_product_labels.gemspec.
 group :development, :test do
   gem 'brakeman'
-  gem 'rspec-rails'
   gem 'rubocop'
+  gem 'rubocop-rails'
 end
 
 gemspec

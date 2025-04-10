@@ -1,24 +1,35 @@
-# README
+# Spree ProductLabels
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+**Spree ProductLabels** is a plugin to extend Product Labels capabilities.
 
-Things you may want to cover:
+## Getting Started
 
-* Ruby version
+Add spree_product_labels to your Gemfile and run bundle install:
 
-* System dependencies
+```sh
+gem 'spree_product_labels'
+```
 
-* Configuration
+Next, you need to run the generator to create the migrations:
 
-* Database creation
+```console
+rails generate spree_product_labels:install
+```
 
-* Database initialization
+Then run `rails db:migrate` so the migrations can take effect
 
-* How to run the test suite
+```console
+rails db:migrate
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+Finally, you need to add a link to the menu in the `config/initializers/spree_admin_menu.rb` file from your application:
 
-* Deployment instructions
+```code
+if ActiveRecord::Base.connection.data_source_exists?('spree_labels')
+   builder_labels = ::Spree::Admin::MainMenu::ItemBuilder.new('admin.tab.labels', '/admin/labels')
+   menu_labels = builder_labels.with_match_path('/labels').build
+   Rails.application.config.spree_backend.main_menu.add_to_section 'products', menu_labels
+end
+```
 
-* ...
+You should restart your application after these updates. Otherwise, you will run into strange errors, for example, route helpers being undefined.

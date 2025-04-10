@@ -1,0 +1,28 @@
+# frozen_string_literal: true
+
+module Spree
+  module ProductDecorator
+    def self.prepended(base)
+      return if base.reflect_on_association(:labels)
+
+      base.has_and_belongs_to_many :labels, class_name: 'Spree::Label', join_table: 'labels_products'
+    end
+
+    def first_active_label
+      all_active_labels = labels.where('start_date <= ? AND end_date >= ?', Time.zone.today, Time.zone.today)
+                                .or(labels.where(always_active: true))
+
+      priority_positions = labels.where(active: true).pluck(:position).uniq.sort
+
+      priority_positions.each do |pos|
+        label = labels.find_by(
+          lang_code: I18n.locale.to_s,
+          active: true,
+          position: pos,
+          id: all_active_labels.select(:id)
+        )
+        return label&.name if label.present?
+      end
+    end
+  end
+end

@@ -1,0 +1,16 @@
+.d-flex.justify-content-between
+  h2
+    = Spree.t('promotion_rule_types.exclude_product.link')
+
+= form_tag import_products_admin_label_path(@label), method: :post, multipart: true do
+  .mb-4
+    = file_field_tag :import_file, required: false
+  .mb-4
+    .form-check
+      = radio_button_tag :overwrite, false, true, class: 'form-check-input'
+      = label_tag :overwrite, t('spree.admin.taxon.import.append'), class: 'form-check-label'
+    .form-check
+      = radio_button_tag :overwrite, true, false, class: 'form-check-input'
+      = label_tag :overwrite, t('spree.admin.taxon.import.overwrite'), class: 'form-check-label'
+  = button Spree.t('spree.admin.taxon.import.import'), 'hdd.svg', 'submit', {class: 'btn-primary', data: { disable_with: "#{ Spree.t(:saving) }..." }}
+  = button_link_to Spree.t('actions.cancel'), edit_admin_label_path(@label), icon: 'cancel.svg', data: { turbo: false }
