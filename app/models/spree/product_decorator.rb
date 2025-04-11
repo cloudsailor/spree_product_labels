@@ -16,7 +16,7 @@ module Spree
 
       priority_positions.each do |pos|
         label = labels.find_by(
-          lang_code: I18n.locale.to_s,
+          store_id: Spree::Store.find_by(default_locale: I18n.locale).id,
           active: true,
           position: pos,
           id: all_active_labels.select(:id)
