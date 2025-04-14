@@ -9,8 +9,10 @@ module Spree
     end
 
     def first_active_label
-      all_active_labels = labels.where('start_date <= ? AND end_date >= ?', Time.zone.today, Time.zone.today)
-                                .or(labels.where(always_active: true))
+      all_active_labels = labels.where(
+        '(start_date <= ? AND end_date >= ?) OR end_date IS NULL',
+        Time.zone.today, Time.zone.today
+      )
 
       priority_positions = labels.where(active: true).pluck(:position).uniq.sort
 
