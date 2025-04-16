@@ -1,0 +1,16 @@
+Version 1.0.0:
+
+
+Version 0.1.0
+ - Add bump-version
+ - Add version.sh
+ - Merge pull request #3 from cloudsailor/EK-88
+ - EK-88 Fix always_active
+ - Merge pull request #2 from cloudsailor/EK-88
+ - EK-88 Fix lang_code for ProductDecorator
+ - Merge pull request #1 from cloudsailor/EK-88
+ - EK-88 Add sidekiq import_products_job
+ - EK-88 Changes after review
+ - EK-88 Labelki produktu listingu
+ - init gem
+
