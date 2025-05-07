@@ -5,5 +5,6 @@ Rails.application.config.after_initialize do
     Spree::Product.prepend Spree::ProductDecorator
     Spree::Store.prepend Spree::StoreDecorator
     Spree::V2::Storefront::ProductSerializer.prepend Spree::V2::Storefront::ProductSerializerDecorator
+    Spree::Admin::ProductsController.prepend Spree::Admin::ProductsControllerDecorator
   end
 end
