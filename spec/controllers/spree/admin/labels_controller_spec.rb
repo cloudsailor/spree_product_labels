@@ -74,7 +74,7 @@ RSpec.describe Spree::Admin::LabelsController, type: :controller do
   describe 'PATCH #update' do
     context 'with valid params' do
       it 'updates the label' do
-        patch :update, params: { id: label.id, label: { name: 'Updated Name' } }
+        patch :update, params: { id: label.id, label: { name: 'Updated Name', label_type: 'New' } }
         label.reload
 
         expect(label.name).to eq('Updated Name')

@@ -9,6 +9,16 @@ module Spree
     end
 
     def first_active_label
+      first_matching_label&.name
+    end
+
+    def first_active_label_color
+      first_matching_label&.color
+    end
+
+    private
+
+    def first_matching_label
       all_active_labels = labels.where(
         '(start_date <= ? AND end_date >= ?) OR end_date IS NULL',
         Time.zone.today, Time.zone.today
@@ -23,8 +33,10 @@ module Spree
           position: pos,
           id: all_active_labels.select(:id)
         )
-        return label&.name if label.present?
+        return label if label.present?
       end
+
+      nil
     end
   end
 end

@@ -12,6 +12,8 @@ en:
         end_date: End Date
         always_active: Always Active
         status: Status
+        color: Color
+        custom_label_type: ← Select "Other" Label Type if you want to create a new one
         products_count: Products Count
         new_label: New Label
         edit_label: Edit Label

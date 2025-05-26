@@ -12,6 +12,8 @@ sk:
         end_date: End Date
         always_active: Always Active
         status: Status
+        color: Color
+        custom_label_type: ← Vyberte "Other" Typ štítku, ak chcete vytvoriť nový
         products_count: Products Count
         new_label: New Label
         edit_label: Edit Label
