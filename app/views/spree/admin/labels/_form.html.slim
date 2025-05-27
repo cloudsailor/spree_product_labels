@@ -11,7 +11,7 @@
   .d-flex.justify-content-between
     .form-group.w-50.mr-2
       = f.label :label_type, t('spree.admin.label.label_type')
-      = f.select :label_type, options_for_select(Spree::Label.pluck(:label_type) + [%w[Other other]]), { include_blank: false }, class: 'form-control'
+      = f.select :label_type, options_for_select(Spree::Label.pluck(:label_type) + [[t('spree.admin.label.other_type'), 'other']]), { include_blank: false }, class: 'form-control'
 
     .form-group.w-50
       = f.label :custom_label_type, t('spree.admin.label.custom_label_type')
