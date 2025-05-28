@@ -1,7 +1,14 @@
+Version 1.1.0:
+
+
 Version 1.0.0:
 
 
 Version 0.1.0
+ - Merge pull request #6 from cloudsailor/EK-470
+ - EK-470 Poprawa rozwiazania labelek
+ - Merge pull request #4 from cloudsailor/EK-293
+ - EK-293 Testy Gem'u product labels
  - Add bump-version
  - Add version.sh
  - Merge pull request #3 from cloudsailor/EK-88

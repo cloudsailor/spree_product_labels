@@ -19,6 +19,11 @@ Lint/AmbiguousOperator:
 Metrics/AbcSize:
   Max: 30
 
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*
+    - spree_product_labels.gemspec
+
 Metrics/CyclomaticComplexity:
   Exclude:
     - app/sidekiq/import_products_job.rb
