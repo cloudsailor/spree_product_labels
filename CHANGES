@@ -1,0 +1,20 @@
+Version 1.1.0:
+
+
+Version 0.1.0
+ - Merge pull request #6 from cloudsailor/EK-470
+ - EK-470 Poprawa rozwiazania labelek
+ - Merge pull request #4 from cloudsailor/EK-293
+ - EK-293 Testy Gem'u product labels
+ - Add bump-version
+ - Add version.sh
+ - Merge pull request #3 from cloudsailor/EK-88
+ - EK-88 Fix always_active
+ - Merge pull request #2 from cloudsailor/EK-88
+ - EK-88 Fix lang_code for ProductDecorator
+ - Merge pull request #1 from cloudsailor/EK-88
+ - EK-88 Add sidekiq import_products_job
+ - EK-88 Changes after review
+ - EK-88 Labelki produktu listingu
+ - init gem
+
