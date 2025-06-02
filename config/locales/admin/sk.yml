@@ -12,6 +12,9 @@ sk:
         end_date: End Date
         always_active: Always Active
         status: Status
+        color: Color
+        custom_label_type: ← Select "Other" Label Type if you want to create a new one
+        other_type: Other
         products_count: Products Count
         new_label: New Label
         edit_label: Edit Label
@@ -21,6 +24,7 @@ sk:
           only_one_active_label_per_priority: "Only one active label with position %{position} can exist at a time"
           only_one_active_label_per_type: Only one active label of a given type is allowed
           no_overlapping_validity_dates: The validity dates of a given label type cannot overlap
+          color_format: 'Must be a valid color format (e.g., #FF0000)'
         created: Label Created
         updated: Label Updated
         deleted: Label Deleted

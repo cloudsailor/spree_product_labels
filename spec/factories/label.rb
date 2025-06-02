@@ -7,6 +7,7 @@ FactoryBot.define do
       sequence(:position) { |n| n }
       label_type { 'promo' }
       active { true }
+      color { '#0000FF' }
       store
 
       transient { days_offset { 0 } }

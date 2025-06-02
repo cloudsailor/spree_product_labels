@@ -45,8 +45,12 @@ RSpec.describe Spree::Admin::LabelsController, type: :controller do
 
   describe 'POST #create' do
     context 'with valid params' do
-      it 'creates a new Label' do
+      it 'creates a new Label with the correct label_type' do
+        valid_attributes[:label_type] = 'other'
+        valid_attributes[:custom_label_type] = 'Custom Type'
+
         expect { post :create, params: { label: valid_attributes } }.to change(Spree::Label, :count).by(1)
+        expect(Spree::Label.last.label_type).to eq('Custom Type')
         expect(response).to redirect_to(admin_labels_path)
         expect(flash[:success]).to eq(I18n.t('spree.admin.label.created'))
       end
@@ -73,11 +77,11 @@ RSpec.describe Spree::Admin::LabelsController, type: :controller do
 
   describe 'PATCH #update' do
     context 'with valid params' do
-      it 'updates the label' do
-        patch :update, params: { id: label.id, label: { name: 'Updated Name' } }
+      it 'updates the label with the correct label_type' do
+        patch :update, params: { id: label.id, label: { label_type: 'other', custom_label_type: 'Custom Type' } }
         label.reload
 
-        expect(label.name).to eq('Updated Name')
+        expect(label.label_type).to eq('Custom Type')
         expect(response).to redirect_to(admin_labels_path)
         expect(flash[:success]).to eq(I18n.t('spree.admin.label.updated'))
       end
