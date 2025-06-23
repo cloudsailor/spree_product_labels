@@ -12,11 +12,17 @@ module Spree
     validate :no_overlapping_validity_dates
     validate :validate_color_format
 
+    before_validation :capitalize_label_type
+
     def always_active
       end_date.nil?
     end
 
     private
+
+    def capitalize_label_type
+      self.label_type = label_type.capitalize if label_type.present?
+    end
 
     def end_date_after_start_date
       return if always_active
