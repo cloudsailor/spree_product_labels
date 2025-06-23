@@ -7,6 +7,7 @@
     thead
       tr
         th = t('spree.admin.label.name')
+        th = t('spree.admin.label.description')
         th = t('spree.admin.label.label_type')
         th = t('spree.admin.label.position')
         th = t('spree.admin.label.start_date')
@@ -19,6 +20,7 @@
       - @labels.each do |label|
         tr
           td = label.name
+          td = label.description
           td = label.label_type
           td = label.position
           td

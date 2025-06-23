@@ -8,10 +8,17 @@
     = f.label :name, t('spree.admin.label.name')
     = f.text_field :name, class: 'form-control'
 
+  .form-group
+    = f.label :description, t('spree.admin.label.description')
+    = f.text_field :description, class: 'form-control'
+
   .d-flex.justify-content-between
     .form-group.w-50.mr-2
       = f.label :label_type, t('spree.admin.label.label_type')
-      = f.select :label_type, options_for_select(Spree::Label.pluck(:label_type) + [[t('spree.admin.label.other_type'), 'other']]), { include_blank: false }, class: 'form-control'
+      - if action_name == 'edit'
+        = f.select :label_type, options_for_select(Spree::Label.pluck(:label_type).uniq + [[t('spree.admin.label.other_type'), 'other']], f.object.label_type), { include_blank: false }, class: 'form-control'
+      - else
+        = f.select :label_type, options_for_select(Spree::Label.pluck(:label_type).uniq + [[t('spree.admin.label.other_type'), 'other']]), { include_blank: false }, class: 'form-control'
 
     .form-group.w-50
       = f.label :custom_label_type, t('spree.admin.label.custom_label_type')
