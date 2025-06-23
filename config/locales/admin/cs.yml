@@ -6,6 +6,7 @@ cs:
       labels: Labels
       label:
         name: Name
+        description: Description
         label_type: Label Type
         position: Position
         start_date: Start Date

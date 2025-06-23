@@ -89,7 +89,9 @@ module Spree
       end
 
       def label_params
-        params.require(:label).permit(:name, :label_type, :position, :active, :start_date, :end_date, :store_id, :color)
+        params.require(:label).permit(
+          :name, :label_type, :position, :active, :start_date, :end_date, :store_id, :color, :description
+        )
       end
     end
   end

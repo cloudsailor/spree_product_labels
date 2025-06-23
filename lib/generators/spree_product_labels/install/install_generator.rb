@@ -16,6 +16,7 @@ module SpreeProductLabels
       add_product_labels_migration('create_spree_labels')
       add_product_labels_migration('create_labels_products')
       add_product_labels_migration('add_color_to_labels')
+      add_product_labels_migration('add_description_to_labels')
     end
 
     private
