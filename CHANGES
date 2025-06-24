@@ -1,3 +1,26 @@
+Version 1.2.0:
+ - Merge pull request #10 from cloudsailor/EK-399
+ - EK-399 Add capitalize_label_type callback
+ - Merge pull request #9 from cloudsailor/EK-399
+ - EK-399 Update after review
+ - EK-399 Add Description
+ - EK-398 Fix error in the make_active task
+ - Merge pull request #8 from cloudsailor/EK-398
+ - Merge pull request #5 from cloudsailor/EK-348
+ - EK-398 Change start_date for destroy
+ - EK-398 Changes after review
+ - EK-398 Labels - Rails job
+ - EK-348 Lista indeksów w labelce
+ - Merge pull request #7 from cloudsailor/EK-399
+ - Merge branch 'release-1.1.0' into develop
+ - EK-399 Changes after review
+ - Merge branch 'release-1.1.0'
+ - EK-399 Definiowanie wartosci labelek
+ - Merge branch 'release-1.0.0' into master
+ - Update gem version
+ - Version bump to 1.0.0
+ - Added VERSION and CHANGES files, Version bump to 0.1.0
+
 Version 1.1.0:
 
 
