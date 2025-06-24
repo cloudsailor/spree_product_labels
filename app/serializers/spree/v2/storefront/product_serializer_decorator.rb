@@ -6,6 +6,7 @@ module Spree
       module ProductSerializerDecorator
         def self.prepended(base)
           base.attribute :label, &:first_active_label
+          base.attribute :label_color, &:first_active_label_color
         end
       end
     end

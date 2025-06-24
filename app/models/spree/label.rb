@@ -10,12 +10,19 @@ module Spree
     validate :only_one_active_label_per_priority
     validate :only_one_active_label_per_type
     validate :no_overlapping_validity_dates
+    validate :validate_color_format
+
+    before_validation :capitalize_label_type
 
     def always_active
       end_date.nil?
     end
 
     private
+
+    def capitalize_label_type
+      self.label_type = label_type.capitalize if label_type.present?
+    end
 
     def end_date_after_start_date
       return if always_active
@@ -52,6 +59,12 @@ module Spree
       return unless overlapping_labels.exists?
 
       errors.add(:base, Spree.t('admin.label.validates.no_overlapping_validity_dates'))
+    end
+
+    def validate_color_format
+      return if color.blank? || color.match?(/\A#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})\z/)
+
+      errors.add(:color, Spree.t('admin.label.validates.color_format'))
     end
   end
 end

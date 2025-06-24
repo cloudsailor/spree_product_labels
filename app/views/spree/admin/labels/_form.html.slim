@@ -9,8 +9,18 @@
     = f.text_field :name, class: 'form-control'
 
   .form-group
-    = f.label :label_type, t('spree.admin.label.label_type')
-    = f.text_field :label_type, class: 'form-control'
+    = f.label :description, t('spree.admin.label.description')
+    = f.text_field :description, class: 'form-control'
+
+  .d-flex.justify-content-between
+    .form-group.w-50.mr-2
+      = f.label :label_type, t('spree.admin.label.label_type')
+      = f.select :label_type, options_for_select(Spree::Label.pluck(:label_type).uniq + [[t('spree.admin.label.other_type'), 'other']], f.object.label_type),
+                              { include_blank: false }, class: 'form-control'
+
+    .form-group.w-50
+      = f.label :custom_label_type, t('spree.admin.label.custom_label_type')
+      = f.text_field :custom_label_type, value: nil, class: 'form-control'
 
   .form-group
     = f.label :position, t('spree.admin.label.position')
@@ -27,6 +37,10 @@
   .form-group
     = f.label :end_date, t('spree.admin.label.end_date')
     = f.date_field :end_date, class: 'form-control'
+
+  .form-group
+    = f.label :color, t('spree.admin.label.color')
+    = f.color_field :color, class: 'form-control'
 
   = f.hidden_field :store_id, value: current_store.id
 
