@@ -148,4 +148,27 @@ RSpec.describe Spree::Label, type: :model do
       expect(label.always_active).to eq(false)
     end
   end
+
+  describe '#capitalize_label_type' do
+    it 'capitalizes label_type before validation' do
+      label = build(:label, label_type: 'test type')
+
+      expect(label).to be_valid
+      expect(label.label_type).to eq('Test type')
+    end
+
+    it 'does not change label_type if it is already capitalized' do
+      label = build(:label, label_type: 'Test type')
+
+      expect(label).to be_valid
+      expect(label.label_type).to eq('Test type')
+    end
+
+    it 'handles nil label_type gracefully' do
+      label = build(:label, label_type: nil)
+
+      expect(label).to be_invalid
+      expect(label.label_type).to be_nil
+    end
+  end
 end
