@@ -14,7 +14,7 @@ module Spree
       end
 
       def create
-        @label = Spree::Label.new(label_params)
+        @label = Spree::Label.new(label_params.merge(label_type:))
         if @label.save
           flash[:success] = t('spree.admin.label.created')
           redirect_to admin_labels_path
@@ -27,7 +27,7 @@ module Spree
       def edit; end
 
       def update
-        if @label.update(label_params)
+        if @label.update(label_params.merge(label_type:))
           flash[:success] = t('spree.admin.label.updated')
           redirect_to admin_labels_path
         else
@@ -80,8 +80,18 @@ module Spree
         redirect_to admin_labels_path and return
       end
 
+      def label_type
+        if params[:label][:label_type] == 'other'
+          params[:label][:custom_label_type].presence
+        else
+          params[:label][:label_type]
+        end
+      end
+
       def label_params
-        params.require(:label).permit(:name, :label_type, :position, :active, :start_date, :end_date, :store_id)
+        params.require(:label).permit(
+          :name, :label_type, :position, :active, :start_date, :end_date, :store_id, :color, :description
+        )
       end
     end
   end

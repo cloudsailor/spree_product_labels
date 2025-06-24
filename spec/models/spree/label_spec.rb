@@ -86,6 +86,52 @@ RSpec.describe Spree::Label, type: :model do
           expect(overlapping_label.errors[:base]).to include(Spree.t('admin.label.validates.no_overlapping_validity_dates'))
         end
       end
+
+      describe '#validate_color_format' do
+        context 'when color is valid' do
+          it 'with a valid hex color code' do
+            label = build(:label, color: '#FF0000')
+
+            expect(label).to be_valid
+          end
+
+          it 'with a valid shorthand hex color code' do
+            label = build(:label, color: '#F00')
+
+            expect(label).to be_valid
+          end
+        end
+
+        context 'when color is invalid' do
+          it 'with an invalid hex color code' do
+            label = build(:label, color: 'invalid_color')
+
+            expect(label).to be_invalid
+            expect(label.errors[:color]).to include(Spree.t('admin.label.validates.color_format'))
+          end
+
+          it 'with a color code missing the hash symbol' do
+            label = build(:label, color: 'FF0000')
+
+            expect(label).to be_invalid
+            expect(label.errors[:color]).to include(Spree.t('admin.label.validates.color_format'))
+          end
+
+          it 'with a color code that is too short' do
+            label = build(:label, color: '#FF')
+
+            expect(label).to be_invalid
+            expect(label.errors[:color]).to include(Spree.t('admin.label.validates.color_format'))
+          end
+
+          it 'with a color code that is too long' do
+            label = build(:label, color: '#FFFFFFFF')
+
+            expect(label).to be_invalid
+            expect(label.errors[:color]).to include(Spree.t('admin.label.validates.color_format'))
+          end
+        end
+      end
     end
   end
 
@@ -100,6 +146,29 @@ RSpec.describe Spree::Label, type: :model do
       label = build(:label, end_date: Time.zone.today)
 
       expect(label.always_active).to eq(false)
+    end
+  end
+
+  describe '#capitalize_label_type' do
+    it 'capitalizes label_type before validation' do
+      label = build(:label, label_type: 'test type')
+
+      expect(label).to be_valid
+      expect(label.label_type).to eq('Test type')
+    end
+
+    it 'does not change label_type if it is already capitalized' do
+      label = build(:label, label_type: 'Test type')
+
+      expect(label).to be_valid
+      expect(label.label_type).to eq('Test type')
+    end
+
+    it 'handles nil label_type gracefully' do
+      label = build(:label, label_type: nil)
+
+      expect(label).to be_invalid
+      expect(label.label_type).to be_nil
     end
   end
 end
