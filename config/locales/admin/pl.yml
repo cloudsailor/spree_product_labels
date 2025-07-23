@@ -1,5 +1,8 @@
 pl:
   spree:
+    notice_messages:
+      label:
+        product_deleted: "Product has been deleted from the label '%{label_name}'"
     admin:
       tab:
         labels: Labels
