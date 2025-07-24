@@ -3,7 +3,7 @@
 module Spree
   module Admin
     class LabelsController < ::Spree::Admin::BaseController
-      before_action :set_label, only: %i[edit update destroy new_import import_products]
+      before_action :set_label, only: %i[edit update destroy new_import import_products label_products destroy_product]
 
       def index
         @labels = Spree::Label.where(store_id: current_store.id).order(:position)
@@ -56,6 +56,20 @@ module Spree
         ImportProductsJob.perform_async(@label.id, temp_file_path, params[:overwrite])
         flash[:notice] = t('flash.actions.import.success')
         redirect_to edit_admin_label_path(@label)
+      end
+
+      def label_products
+        @collection = @label.products.page(params[:page]).per(25)
+      end
+
+      def destroy_product
+        product = Spree::Product.find_by(id: params[:product_id])
+        if @label.products.destroy(product)
+          flash[:success] = Spree.t('notice_messages.label.product_deleted', label_name: @label.name)
+        else
+          flash[:error] = Spree.t('notice_messages.product_not_deleted', error: product.errors.full_messages.to_sentence)
+        end
+        redirect_to label_products_admin_label_path(@label)
       end
 
       private
