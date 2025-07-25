@@ -1,8 +1,12 @@
 pl:
   spree:
+    notice_messages:
+      label:
+        product_deleted: Product has been deleted from the label '%{label_name}'
     admin:
       tab:
         labels: Labels
+        label: Label
       labels: Labels
       label:
         name: Name
@@ -20,6 +24,7 @@ pl:
         products_count: Products Count
         new_label: New Label
         edit_label: Edit Label
+        remove_product: Remove from '%{label_name}'
         validates:
           date_blank: Start date and end date must be present unless the label is always active
           end_date_after_start_date: must be after start date
