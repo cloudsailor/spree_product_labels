@@ -1,3 +1,18 @@
+Version 1.3.0:
+ - Merge pull request #12 from cloudsailor/EK-616
+ - EK-616 Fix error about empty label_products
+ - Merge pull request #11 from cloudsailor/EK-616
+ - EK-616 Create custom view for label_products
+ - EK-616 Usuwanie produktow z grup labeli
+ - Create PULL_REQUEST_TEMPLATE.md
+ - Merge branch 'release-1.2.0' into develop
+ - Merge branch 'release-1.2.0'
+ - Merge branch 'release-1.1.0'
+ - Merge branch 'release-1.0.0' into master
+ - Update gem version
+ - Version bump to 1.0.0
+ - Added VERSION and CHANGES files, Version bump to 0.1.0
+
 Version 1.2.0:
  - Merge pull request #10 from cloudsailor/EK-399
  - EK-399 Add capitalize_label_type callback

@@ -15,7 +15,7 @@ class ImportProductsJob
       next if sku.blank?
 
       variant = ::Spree::Variant.find_by(sku: sku)
-      label.products << variant.product if variant&.product
+      label.products << variant.product unless variant&.product.nil? || label.products.include?(variant.product)
     end
 
     label.save!
