@@ -8,17 +8,17 @@ module Spree
       base.has_and_belongs_to_many :labels, class_name: 'Spree::Label', join_table: 'labels_products'
     end
 
-    def first_active_label
-      first_matching_label&.name
+    def first_active_label(store:)
+      first_matching_label(store: store)&.name
     end
 
-    def first_active_label_color
-      first_matching_label&.color
+    def first_active_label_color(store:)
+      first_matching_label(store: store)&.color
     end
 
     private
 
-    def first_matching_label
+    def first_matching_label(store:)
       all_active_labels = labels.where(
         '(start_date <= ? AND end_date >= ?) OR end_date IS NULL',
         Time.zone.today, Time.zone.today
@@ -28,7 +28,7 @@ module Spree
 
       priority_positions.each do |pos|
         label = labels.find_by(
-          store_id: Spree::Store.find_by(default_locale: I18n.locale).id,
+          store_id: store.id,
           active: true,
           position: pos,
           id: all_active_labels.select(:id)
