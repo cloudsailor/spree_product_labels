@@ -33,7 +33,7 @@ RSpec.describe Spree::Product, type: :model do
     it 'returns the name of the active label with the highest priority' do
       product.labels << [promo_label, info_label]
 
-      expect(product.first_active_label(store: store)).to eq('Promo Label')
+      expect(product.first_active_label(store:)).to eq('Promo Label')
     end
 
     context 'when label has no end_date (always active)' do
@@ -45,7 +45,7 @@ RSpec.describe Spree::Product, type: :model do
       it 'prefers always active label if it has higher priority' do
         product.labels << active_label
 
-        expect(product.first_active_label(store: store)).to eq('Always Active')
+        expect(product.first_active_label(store:)).to eq('Always Active')
       end
     end
 
@@ -54,7 +54,7 @@ RSpec.describe Spree::Product, type: :model do
         promo_label.update(active: false)
         info_label.update(active: false)
 
-        expect(product.first_active_label(store: store)).to eq(nil)
+        expect(product.first_active_label(store:)).to eq(nil)
       end
     end
   end
