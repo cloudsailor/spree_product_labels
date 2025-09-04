@@ -6,7 +6,7 @@ namespace :labels do
     today = Time.zone.today
     labels_to_activate = Spree::Label.where(start_date: today)
     labels_count = labels_to_activate.count
-    if labels_count > 0
+    if labels_count.positive?
       puts "Found labels with start_date of #{today}. Proceeding to activate them."
       puts "Number of labels to activate: #{labels_count}"
       labels_to_activate.find_each do |label|

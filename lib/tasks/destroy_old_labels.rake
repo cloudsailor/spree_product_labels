@@ -8,7 +8,7 @@ namespace :labels do
     old_labels = Spree::Label.where('end_date < ?', today)
     labels_count = old_labels.count
 
-    if labels_count > 0
+    if labels_count.positive?
       puts "Found #{labels_count} labels with end_date before #{today}. Proceeding to destroy them."
       old_labels.destroy_all
       puts "Successfully destroyed #{labels_count} labels with end_date before #{today}."
