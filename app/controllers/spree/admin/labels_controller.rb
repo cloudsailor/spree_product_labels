@@ -5,6 +5,10 @@ module Spree
     class LabelsController < ::Spree::Admin::BaseController
       before_action :set_label, only: %i[edit update destroy new_import import_products label_products destroy_product]
 
+      def model_class
+        Spree::Label
+      end
+
       def index
         @labels = Spree::Label.where(store_id: current_store.id).order(:position)
       end
