@@ -6,7 +6,7 @@ class AddLabelToProduct
     name: 'add_label_to_product',
     insert_after: "div[data-hook='admin_product_form_tax_category']",
     text: <<-HTML
-    <%- unless @product.labels&.blank? %>
+    <%- unless @product.try(:labels).blank? %>
       <div class="table-responsive border rounded bg-white">
         <table class="table">
           <thead class="text-muted text-center">
