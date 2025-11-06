@@ -3,8 +3,6 @@
 module Spree
   module ProductDecorator
     def self.prepended(base)
-      return if base.reflect_on_association(:labels)
-
       base.has_and_belongs_to_many :labels, class_name: 'Spree::Label', join_table: 'labels_products'
     end
 
