@@ -24,7 +24,7 @@
       <% available_status = available_status(product) %>
       <tr <%== "style='color: red;'" if product.deleted? %> id="<%= spree_dom_id product %>" data-hook="admin_products_index_rows" class="<%= cycle('odd', 'even') %>">
         <td scope="row" class="image">
-          <% if product.public_metadata["images"].first %>
+          <% if product.public_metadata["images"]&.first %>
             <%= image_tag product.public_metadata["images"].first["url"], style: "width: 60px; height: auto;", alt: product.name %>
           <% end %>
         </td>
